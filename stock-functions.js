@@ -16,11 +16,12 @@ function BuyStocks(portfolio, stock, numshares) {
 }
 
 function SellStocks(portfolio, stock, numshares) {
+  //If portfolio doesnt have the particular stock
   if (!portfolio.has(stock)) {
     throw "You don't own that stock, buddy";
-  } else if (portfolio.get(stock) - numshares < 0) {
+  } else if ((portfolio.get(stock) - numshares) < 0) {
     //RAISE EXCEPTION HERE
-    throw "ShareSaleException";
+    throw 'ShareSaleException' ;
   }
   //THEN IF THE STOCK HAS 0 delete it
   else if (portfolio.get(stock) - numshares === 0) {
@@ -32,15 +33,9 @@ function GetNumSharesPerStock(portfolio, stock) {
   return portfolio.get(stock);
 }
 
-function PrintPortfolio(portfolio) {
-  portfolio.forEach((value, key) => {
-    console.log(`${key} = ${value}`);
-  });
-}
 
 exports.CreatePortfolio = CreatePortfolio;
 exports.SizeOfPortfolio = SizeOfPortfolio;
 exports.BuyStocks = BuyStocks;
 exports.SellStocks = SellStocks;
-exports.PrintPortfolio = PrintPortfolio;
 exports.GetNumSharesPerStock = GetNumSharesPerStock;

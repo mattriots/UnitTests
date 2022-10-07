@@ -1,5 +1,4 @@
 const stockFunctions = require("./stock-functions");
-const myFunctions = require("./sample-functions");
 
 test("Testing empty portfolio -- success", () => {
   const target = 0;
@@ -49,32 +48,19 @@ test("Sell 2 GME, 4 RBLX, 3 TSLA -- success", () => {
   stockFunctions.SellStocks(MattsPortfolio, "RBLX", 4);
   stockFunctions.SellStocks(MattsPortfolio, "TSLA", 3);
   expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "GME")).toBe(GME);
-  expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "RBLX")).toBe(
-    RBLX
-  );
-  expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "TSLA")).toBe(
-    TSLA
-  );
+  expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "RBLX")).toBe(RBLX);
+  expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "TSLA")).toBe(TSLA);
 });
 
 //Sell all of TSLA, and TSLA shouldn't exist
 test("Portfolio should only keep owned symbols -- success", () => {
-
   const TSLA = 0;
   stockFunctions.SellStocks(MattsPortfolio, "TSLA", 7);
   expect(stockFunctions.GetNumSharesPerStock(MattsPortfolio, "TSLA")).toBeUndefined();
 });
 
 
-//Need to work this out one
+//Expect to raise and exception here
 test("Raise a ShareSaleException-- success", () => {
-  stockFunctions.SellStocks(MattsPortfolio, "GME", 7);
-  expect(() => stockFunctions.GetNumSharesPerStock(MattsPortfolio, "GME")).toThrow('ShareSaleException');
-});
-
-
-
-
-MattsPortfolio.forEach((v, k) => {
-  console.log(`${k} = ${v}`);
+  expect(() => stockFunctions.SellStocks(MattsPortfolio, "GME", 7)).toThrow('ShareSaleException');
 });
